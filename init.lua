@@ -73,6 +73,18 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
+
+vim.keymap.set('v', 'w', function()
+  -- Save the original start of the visual selection
+  local other_end = vim.fn.getpos 'v'
+
+  if vim.api.nvim_win_get_cursor(0)[1] > other_end[2] or vim.api.nvim_win_get_cursor(0)[2] > other_end[3] then
+    vim.api.nvim_feedkeys('wo', 'n', false)
+  else
+    vim.api.nvim_feedkeys('owo', 'n', false)
+  end
+end, { noremap = true, silent = true })
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
