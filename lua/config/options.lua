@@ -33,6 +33,11 @@ opt.signcolumn = 'yes'
 opt.cursorline = true
 opt.scrolloff = 8
 
+opt.inccommand = 'split'
+
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 -- Conceallevel for markdown rendering
 opt.conceallevel = 2
 
