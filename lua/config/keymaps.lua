@@ -1,24 +1,14 @@
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+local map = vim.keymap.set
 
--- NvimTree
-vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', 'üd', vim.diagnostic.goto_prev, { desc = 'Go to prev [D]iagnostic message' })
 vim.keymap.set('n', 'õd', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror message' })
-vim.keymap.set('n', '<C-ä>', '<C-^>')
+vim.keymap.set('n', '<C-ü>', '<C-^>')
 
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -27,3 +17,126 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+
+-- === FILE OPERATIONS (Ctrl+) ===
+map("n", "<C-s>", ":w<CR>", { desc = "Save file" })
+map("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save file" })
+map("n", "<C-q>", ":q<CR>", { desc = "Quit" })
+map("n", "<C-n>", ":enew<CR>", { desc = "New file" })
+map("n", "<C-w>", ":bdelete<CR>", { desc = "Close buffer", silent = true })
+
+-- === NAVIGATION (Ctrl+) ===
+map("n", "<C-p>", ":Telescope find_files<CR>", { desc = "Quick open file" })
+map("n", "<C-S-p>", ":Telescope commands<CR>", { desc = "Command palette" })
+map("n", "<C-S-f>", ":Telescope live_grep<CR>", { desc = "Search in files" })
+--FIX: this is broken:
+map("n", "<C-S-e>", ":Oil<CR>", { desc = "File explorer" })
+map("n", "<C-b>", ":Neotree toggle dir=.<CR>", { desc = "Toggle sidebar" })
+map("n", "<C-'>", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("t", "<C-'>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
+
+-- === EDITOR (Ctrl+) ===
+map("n", "<C-f>", "/", { desc = "Find in file" })
+map("n", "<C-h>", ":%s/", { desc = "Find and replace" })
+map("n", "<C-z>", "u", { desc = "Undo" })
+map("n", "<C-S-z>", "<C-r>", { desc = "Redo" })
+map("n", "<C-a>", "ggVG", { desc = "Select all" })
+map("n", "<C-d>", "viw", { desc = "Select word" })
+
+-- === LINE OPERATIONS (Alt+) ===
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", silent = true })
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up", silent = true })
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down", silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move lines up", silent = true })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move lines down", silent = true })
+map("n", "<A-S-k>", "yyP", { desc = "Duplicate line up" })
+map("n", "<A-S-j>", "yyp", { desc = "Duplicate line down" })
+
+-- === MULTI-CURSOR (kind of) ===
+map("n", "<C-S-l>", "viw:s/\\%V", { desc = "Change all occurrences" })
+
+-- === SPLITS (like VS Code) ===
+map("n", "<C-ä>", ":vsplit<CR>", { desc = "Split right" })
+map("n", "<C-S-ä>", ":split<CR>", { desc = "Split down" })
+
+-- === WINDOW NAVIGATION ===
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
+-- === TAB/BUFFER NAVIGATION ===
+map("n", "<C-Tab>", ":bnext<CR>", { desc = "Next buffer", silent = true })
+map("n", "<C-S-Tab>", ":bprevious<CR>", { desc = "Prev buffer", silent = true })
+map("n", "<C-1>", ":BufferLineGoToBuffer 1<CR>", { silent = true })
+map("n", "<C-2>", ":BufferLineGoToBuffer 2<CR>", { silent = true })
+map("n", "<C-3>", ":BufferLineGoToBuffer 3<CR>", { silent = true })
+map("n", "<C-4>", ":BufferLineGoToBuffer 4<CR>", { silent = true })
+map("n", "<C-5>", ":BufferLineGoToBuffer 5<CR>", { silent = true })
+
+-- === GO TO (Ctrl+G) ===
+map("n", "<C-g>", ":Telescope lsp_document_symbols<CR>", { desc = "Go to symbol" })
+
+-- === TODO STATES ===
+-- Cycle: [ ] -> [@] -> [s] -> [x] -> [ ]
+local todo_states = { "[ ]", "[@]", "[s]", "[x]" }
+local function cycle_todo()
+  local line = vim.api.nvim_get_current_line()
+  for i, state in ipairs(todo_states) do
+    if line:find(vim.pesc(state), 1, true) then
+      local next_state = todo_states[(i % #todo_states) + 1]
+      local new_line = line:gsub(vim.pesc(state), next_state, 1)
+      vim.api.nvim_set_current_line(new_line)
+      return
+    end
+  end
+end
+map("n", "<leader>tt", cycle_todo, { desc = "Cycle todo state" })
+map("n", "<leader>td", function()
+  local line = vim.api.nvim_get_current_line()
+  local new_line = line:gsub("%[.%]", "[d]", 1)
+  vim.api.nvim_set_current_line(new_line)
+end, { desc = "Mark deferred" })
+map("n", "<leader>tb", function()
+  local line = vim.api.nvim_get_current_line()
+  local new_line = line:gsub("%[.%]", "[b]", 1)
+  vim.api.nvim_set_current_line(new_line)
+end, { desc = "Mark blocked" })
+map("n", "<leader>t!", function()
+  local line = vim.api.nvim_get_current_line()
+  local new_line = line:gsub("%[.%]", "[!]", 1)
+  vim.api.nvim_set_current_line(new_line)
+end, { desc = "Mark priority" })
+map("n", "<leader>t?", function()
+  local line = vim.api.nvim_get_current_line()
+  local new_line = line:gsub("%[.%]", "[?]", 1)
+  vim.api.nvim_set_current_line(new_line)
+end, { desc = "Mark question" })
+
+
+-- === BETTER DEFAULTS ===
+map("n", "<Esc>", ":nohlsearch<CR>", { silent = true })
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
+map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
+map("n", "n", "nzzzv", { desc = "Next match (centered)" })
+map("n", "N", "Nzzzv", { desc = "Prev match (centered)" })
+
+-- === TROUBLE / DIAGNOSTICS (Leader+x) ===
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (workspace)" })
+map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Diagnostics (buffer)" })
+map("n", "<leader>xt", "<cmd>Trouble todo toggle<cr>", { desc = "Todos (workspace)" })
+map("n", "<leader>xT", "<cmd>Trouble todo toggle filter.buf=0<cr>", { desc = "Todos (buffer)" })
+map("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols" })
+map("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", { desc = "Location list" })
+map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix list" })
+
+-- === WHICH-KEY GROUPS ===
+-- These will show up nicely in which-key
+map("n", "<leader>f", "", { desc = "+find" })
+map("n", "<leader>g", "", { desc = "+git" })
+map("n", "<leader>t", "", { desc = "+todo" })
+map("n", "<leader>x", "", { desc = "+trouble" })
+map("n", "<leader>D", "", { desc = "+distat" })
