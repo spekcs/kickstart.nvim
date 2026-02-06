@@ -20,11 +20,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 
 -- === FILE OPERATIONS (Ctrl+) ===
-map("n", "<C-s>", ":w<CR>", { desc = "Save file" })
+-- map("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 map("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save file" })
-map("n", "<C-q>", ":q<CR>", { desc = "Quit" })
+-- map("n", "<C-q>", ":q<CR>", { desc = "Quit" })
 map("n", "<C-n>", ":enew<CR>", { desc = "New file" })
-map("n", "<C-w>", ":bdelete<CR>", { desc = "Close buffer", silent = true })
+-- map("n", "<C-w>", ":bdelete<CR>", { desc = "Close buffer", silent = true })
 
 -- === NAVIGATION (Ctrl+) ===
 map("n", "<C-p>", ":Telescope find_files<CR>", { desc = "Quick open file" })
@@ -33,11 +33,11 @@ map("n", "<C-S-f>", ":Telescope live_grep<CR>", { desc = "Search in files" })
 --FIX: this is broken:
 map("n", "<C-S-e>", ":Oil<CR>", { desc = "File explorer" })
 map("n", "<C-b>", ":Neotree toggle dir=.<CR>", { desc = "Toggle sidebar" })
-map("n", "<C-'>", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
-map("t", "<C-'>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("n", "<C-f>", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
+map("t", "<C-f>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
 
 -- === EDITOR (Ctrl+) ===
-map("n", "<C-f>", "/", { desc = "Find in file" })
+-- map("n", "<C-f>", "/", { desc = "Find in file" })
 map("n", "<C-h>", ":%s/", { desc = "Find and replace" })
 map("n", "<C-z>", "u", { desc = "Undo" })
 map("n", "<C-S-z>", "<C-r>", { desc = "Redo" })

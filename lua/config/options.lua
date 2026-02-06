@@ -4,8 +4,8 @@ local opt = vim.opt
 
 -- Line numbers
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
 -- Tabs and indentation
 
@@ -17,7 +17,7 @@ opt.autoindent = true
 opt.smartindent = true
 
 -- Line wrapping
-opt.wrap = false
+opt.wrap = true
 
 -- Search
 opt.ignorecase = true

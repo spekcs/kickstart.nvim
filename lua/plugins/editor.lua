@@ -16,7 +16,6 @@ return {
           "filesystem",
           "buffers",
           "git_status",
-          "distant", -- Custom distant source
         },
         window = {
           width = 30,
@@ -81,7 +80,7 @@ return {
     config = function()
       require("toggleterm").setup({
         size = 15,
-        open_mapping = [[<C-'>]],
+        open_mapping = [[<C-f>]],
         direction = "horizontal",
         shade_terminals = true,
       })
@@ -93,6 +92,15 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = { "nvim-treesitter/nvim-treesitter"},
+    event = "InsertEnter",
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
   },
 
   -- Comment
