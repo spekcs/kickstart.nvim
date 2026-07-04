@@ -17,6 +17,9 @@ return {
       })
     end,
   },
+  {
+    "elkowar/yuck.vim"
+  },
 
   -- Bridge between mason and lspconfig
   {

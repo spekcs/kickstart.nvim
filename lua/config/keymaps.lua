@@ -30,11 +30,9 @@ map("n", "<C-n>", ":enew<CR>", { desc = "New file" })
 map("n", "<C-p>", ":Telescope find_files<CR>", { desc = "Quick open file" })
 map("n", "<C-S-p>", ":Telescope commands<CR>", { desc = "Command palette" })
 map("n", "<C-S-f>", ":Telescope live_grep<CR>", { desc = "Search in files" })
---FIX: this is broken:
 map("n", "<C-S-e>", ":Oil<CR>", { desc = "File explorer" })
 map("n", "<C-b>", ":Neotree toggle dir=.<CR>", { desc = "Toggle sidebar" })
 map("n", "<C-f>", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
-map("t", "<C-f>", "<C-\\><C-n>:ToggleTerm<CR>", { desc = "Toggle terminal" })
 
 -- === EDITOR (Ctrl+) ===
 -- map("n", "<C-f>", "/", { desc = "Find in file" })
@@ -135,7 +133,7 @@ map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix list
 
 -- === WHICH-KEY GROUPS ===
 -- These will show up nicely in which-key
-map("n", "<leader>f", "", { desc = "+find" })
+map("n", "<leader>s", "", { desc = "+search" })
 map("n", "<leader>g", "", { desc = "+git" })
 map("n", "<leader>t", "", { desc = "+todo" })
 map("n", "<leader>x", "", { desc = "+trouble" })

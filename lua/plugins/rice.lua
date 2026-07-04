@@ -175,14 +175,14 @@ return {
     end,
   },
 
-  -- Rainbow delimiters
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("rainbow-delimiters.setup").setup({})
-    end,
-  },
+  -- -- Rainbow delimiters
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   config = function()
+  --     require("rainbow-delimiters.setup").setup({})
+  --   end,
+  -- },
 
   -- Todo comments highlighting
   {
@@ -249,18 +249,18 @@ return {
   },
 
   -- Drop: Screensaver with falling characters
-  {
-    "folke/drop.nvim",
-    event = "VimEnter",
-    opts = {
-      theme = "stars",
-      max = 40,
-      interval = 150,
-      screensaver = 1000 * 60 * 5, -- 5 minutes
-      filetypes = { "alpha" },
-    },
-  },
-
+  -- {
+  --   "folke/drop.nvim",
+  --   event = "VimEnter",
+  --   opts = {
+  --     theme = "stars",
+  --     max = 40,
+  --     interval = 150,
+  --     screensaver = 1000 * 60 * 5, -- 5 minutes
+  --     filetypes = { "alpha" },
+  --   },
+  -- },
+  --
   -- Cellular Automaton: Make your code rain
   {
     "eandrju/cellular-automaton.nvim",
